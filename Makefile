@@ -1,2 +1,25 @@
-rndm.exe: rndm.cc
-	g++ -std=c++11 -I /home/liu_lab/shared/include/ -L /home/liu_lab/shared/lib/ -lCore -lMathCore -lHist -lGpad rndm.cc -o rndm.exe
+.PHONY: all clean
+
+CXXFLAGS = -Wall 
+CXXFLAGS+= $(shell root-config --cflags)
+
+LIBS = $(shell root-config --libs)
+
+RM = rm -fr
+SRC = $(wildcard *.cc)
+EXE = $(SRC:.cc=.exe)
+
+all: $(EXE)
+
+%.exe: %.cc
+	$(CXX) $(CXXFLAGS) $(LIBS) $< -o $@
+
+install:
+	mv *.exe ~/bin/
+info:
+	@echo $(SRC)
+	@echo $(EXE)
+	@echo $(LIBS)
+
+clean:
+	$(RM) *.exe
