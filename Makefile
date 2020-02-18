@@ -1,6 +1,6 @@
 .PHONY: all clean
 
-CXXFLAGS = -Wall 
+CXXFLAGS = -Wall -O2
 CXXFLAGS+= $(shell root-config --cflags)
 
 LIBS = $(shell root-config --libs)
